@@ -5,6 +5,20 @@ import time
 
 
 class BungieOAuth:
+    """Class that is used to get auth tokens from Bungie
+
+    Attributes
+    -----------
+
+    api_data: :class:`dict`
+        Bungie API data. This is set automatically on initialization.
+        Contains two keys: 'id' and 'secret'. These are set correspondingly by ``id_number`` and ``secret``.
+    redirect_url: :class:`str`
+        Redirect url used to get Bungie's auth response.
+    token: :class:`dict`
+        Bungie authorization token. Contains two keys: 'refresh' and 'expires'.
+    """
+
     api_data = ''
     redirect_url = ''
     token = {}
@@ -16,8 +30,17 @@ class BungieOAuth:
         }
         self.redirect_url = redirect_url
 
-    # spin up the flask server so we can oauth authenticate
     def get_oauth(self):
+        """Spin up the flask server to OAuth authenticate.
+
+        Navigate to localhost:4200. When you navigate to there,
+        you must open the developer console and open to the network tab. Click the link, scroll to the bottom of
+        Bungie's page, and click the authorize button. When you do so, nothing will happen, but you'll see a redirect
+        network event that is cancelled (You don't need to do anything when using https. You need to copy the link
+        that was attempted to direct to, and go there directly. If all is well, the script will proceed to the next
+        stage.
+
+        The resulting token will be written to ``self.token`` and file `token.json`"""
         print('No tokens saved, please authorize the app by going to localhost:4200')
 
         app = Flask(__name__)
