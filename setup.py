@@ -1,0 +1,22 @@
+import setuptools
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+setuptools.setup(
+    name="bungie-d2-oauth",
+    version="0.0.1",
+    author="Pavel Movsesian",
+    author_email="movsesyanpv1995@live.com",
+    description="Get your Bungie auth tokens",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/movsesyanpv/bungie-d2-oauth",
+    packages=setuptools.find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: BSD License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires='>=3.6',
+)
