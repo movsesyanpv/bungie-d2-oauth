@@ -14,6 +14,11 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
+import re
+
+with open('../../bungied2auth/__init__.py') as f:
+    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1)
+
 
 # -- Project information -----------------------------------------------------
 
@@ -22,7 +27,7 @@ copyright = '2020, Pavel Movsesian'
 author = 'Pavel Movsesian'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.3'
+release = version
 
 
 # -- General configuration ---------------------------------------------------
