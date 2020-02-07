@@ -1,7 +1,7 @@
 import setuptools
 import re
 
-with open('pydest/__init__.py') as f:
+with open('bungied2auth/__init__.py') as f:
     version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1)
 
 with open("README.md", "r") as fh:
