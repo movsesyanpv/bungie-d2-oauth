@@ -18,5 +18,10 @@ setuptools.setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
     ],
+    install_requires=[
+        'Flask==1.0.2',
+        'setuptools',
+        'requests>=2.20.0'
+      ],
     python_requires='>=3.6',
 )
