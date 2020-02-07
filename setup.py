@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="bungie-d2-oauth",
-    version="0.0.1",
+    version="version",
     author="Pavel Movsesian",
     author_email="movsesyanpv1995@live.com",
     description="Get your Bungie auth tokens",
