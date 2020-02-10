@@ -1,0 +1,45 @@
+:root {
+	--bgcolor: white;
+	--htmlcolor: #222;
+	--tcolor: #222;
+	--bordcolor: #333;
+	--formcolor: #efefef;
+}
+
+@media (prefers-color-scheme: dark){
+    :root {
+	--bgcolor: #222;
+	--htmlcolor: #ddd;
+	--tcolor: #999;
+	--bordcolor: gray;
+	--formcolor: #2a2a2a;
+    }
+}
+
+html, body {
+    background-color: var(--bgcolor) !important;
+}
+
+.sphinxsidebar {
+    background-color: var(--bgcolor) !important;
+    color: var(--tcolor) !important
+}
+
+.body , .docutils, .search, .ethical-sidebar{
+    background-color: var(--bgcolor) !important;
+    color: var(--tcolor) !important
+}
+
+input {
+    background-color: var(--formcolor);
+    color: var(--tcolor) !important;
+    border-color: var(--bordcolor)
+}
+
+code {
+    color: var(--tcolor)
+}
+
+h3, a {
+    color: var(--tcolor) !important
+}
