@@ -33,6 +33,7 @@ class BungieOAuth:
     :param load_dotenv: Load the nearest :file:`.env` and :file:`.flaskenv`
         files to set environment variables. Will also change the working
         directory to the directory containing the first file found.
+    :param context: `ssl_context` from Flask.
     """
 
     api_data = ''
@@ -42,8 +43,9 @@ class BungieOAuth:
     port = None
     debug = None
     load_dotenv = True
+    context = ()
 
-    def __init__(self, id_number, secret, redirect_url='/redirect', host=None, port=None, debug=None, load_dotenv=True):
+    def __init__(self, id_number, secret, context=False, redirect_url='/redirect', host=None, port=None, debug=None, load_dotenv=True):
         self.api_data = {
             'id': str(id_number),
             'secret': str(secret)
@@ -53,6 +55,8 @@ class BungieOAuth:
         self.port = port
         self.debug = debug
         self.load_dotenv = load_dotenv
+        if context:
+            self.context = context
 
     def get_oauth(self):
         """Spin up the flask server to OAuth authenticate.
@@ -112,7 +116,10 @@ class BungieOAuth:
             token_file.write(json.dumps(self.token))
             return '<a href="/shutdown">Click me to continue</a>'
 
-        app.run(host=self.host, port=self.port, debug=self.debug, load_dotenv=self.load_dotenv)
+        if self.context:
+            app.run(host=self.host, port=self.port, debug=self.debug, load_dotenv=self.load_dotenv, ssl_context=self.context)
+        else:
+            app.run(host=self.host, port=self.port, debug=self.debug, load_dotenv=self.load_dotenv)
 
 
 if __name__ == '__main__':
