@@ -55,7 +55,7 @@ exclude_patterns = []
 #
 html_theme = 'alabaster'
 html_theme_options = {
-    'font_family': 'Helvetica, sans-serif'
+    'font_family': 'Helvetica, sans-serif, Georgia, serif'
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
