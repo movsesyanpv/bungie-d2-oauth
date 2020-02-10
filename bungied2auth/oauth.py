@@ -33,9 +33,6 @@ class BungieOAuth:
     :param load_dotenv: Load the nearest :file:`.env` and :file:`.flaskenv`
         files to set environment variables. Will also change the working
         directory to the directory containing the first file found.
-    :param options: the options to be forwarded to the underlying Werkzeug
-        server. See :func:`werkzeug.serving.run_simple` for more
-        information.
     """
 
     api_data = ''
@@ -68,7 +65,7 @@ class BungieOAuth:
         stage.
 
         The resulting token will be written to ``self.token`` and file `token.json`"""
-        print('No tokens saved, please authorize the app by going to localhost:4200')
+        print('No tokens saved, please authorize the app by going to host:port')
 
         app = Flask(__name__)
 
