@@ -12,31 +12,58 @@ class BungieOAuth:
 
     api_data: :class:`dict`
         Bungie API data. This is set automatically on initialization.
-        Contains two keys: 'id' and 'secret'. These are set correspondingly by ``id_number`` and ``secret``.
+        Contains two :class:`str` keys: 'id' and 'secret'. These are set correspondingly by ``id_number`` and ``secret``.
     redirect_url: :class:`str`
         Redirect url used to get Bungie's auth response.
     token: :class:`dict`
         Bungie authorization token. Contains two keys: 'refresh' and 'expires'.
+
+    :param id:
+        OAuth client_id from Bungie.
+    :param secret:
+        OAuth client_secret from Bungie
+    :param host: the hostname to listen on. Set this to ``'0.0.0.0'`` to
+        have the server available externally as well. Defaults to
+        ``'127.0.0.1'`` or the host in the ``SERVER_NAME`` config variable
+        if present.
+    :param port: the port of the webserver. Defaults to ``5000`` or the
+        port defined in the ``SERVER_NAME`` config variable if present.
+    :param debug: if given, enable or disable debug mode. See
+        :attr:`debug`.
+    :param load_dotenv: Load the nearest :file:`.env` and :file:`.flaskenv`
+        files to set environment variables. Will also change the working
+        directory to the directory containing the first file found.
+    :param options: the options to be forwarded to the underlying Werkzeug
+        server. See :func:`werkzeug.serving.run_simple` for more
+        information.
     """
 
     api_data = ''
     redirect_url = ''
     token = {}
+    host = None
+    port = None
+    debug = None
+    load_dotenv = True
 
-    def __init__(self, id_number, secret, redirect_url='/redirect'):
+    def __init__(self, id_number, secret, redirect_url='/redirect', host=None, port=None, debug=None, load_dotenv=True):
         self.api_data = {
-            'id': id_number,
-            'secret': secret
+            'id': str(id_number),
+            'secret': str(secret)
         }
         self.redirect_url = redirect_url
+        self.host = host
+        self.port = port
+        self.debug = debug
+        self.load_dotenv = load_dotenv
 
     def get_oauth(self):
         """Spin up the flask server to OAuth authenticate.
 
-        Navigate to localhost:4200. When you navigate to there,
+        Navigate to `host:port`. When you navigate to there,
         you must open the developer console and open to the network tab. Click the link, scroll to the bottom of
         Bungie's page, and click the authorize button. When you do so, nothing will happen, but you'll see a redirect
-        network event that is cancelled (You don't need to do anything when using https. You need to copy the link
+        network event that is cancelled (You don't need to do anything when using https). You need to copy the link
         that was attempted to direct to, and go there directly. If all is well, the script will proceed to the next
         stage.
 
@@ -88,4 +115,9 @@ class BungieOAuth:
             token_file.write(json.dumps(self.token))
             return '<a href="/shutdown">Click me to continue</a>'
 
-        app.run(port=4200)
+        app.run(host=self.host, port=self.port, debug=self.debug, load_dotenv=self.load_dotenv)
+
+
+if __name__ == '__main__':
+    b = BungieOAuth(0, 0, port=4200)
+    b.get_oauth()
