@@ -18,7 +18,7 @@ class BungieOAuth:
     token: :class:`dict`
         Bungie authorization token. Contains two keys: 'refresh' and 'expires'.
 
-    :param id:
+    :param id_number:
         OAuth client_id from Bungie.
     :param secret:
         OAuth client_secret from Bungie
