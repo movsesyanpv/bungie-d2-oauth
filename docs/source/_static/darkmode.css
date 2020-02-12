@@ -62,3 +62,8 @@ h3, a {
 dt:target {
     background-color: var(--formcolor)
 }
+
+a.headerlink:hover{
+    background:transparent;
+    color: var(--htmlcolor)
+}
